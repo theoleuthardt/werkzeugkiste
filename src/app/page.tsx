@@ -1,7 +1,9 @@
-export default function Home() {
-  return (
-    <div className="bg-white w-screen h-screen">
+import Navbar from '../components/Navbar';
 
-    </div>
+export default function Home() {
+    return  (
+      <div className="bg-black text-white font-noto">
+        <Navbar renderHomeLink={false} />
+      </div>
   );
 }
