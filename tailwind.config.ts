@@ -14,7 +14,7 @@ export default {
       },
       fontFamily: {
         noto: ["Noto Serif", "serif"],
-      }
+      },
     },
   },
   plugins: [],
