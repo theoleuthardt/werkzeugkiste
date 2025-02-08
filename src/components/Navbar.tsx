@@ -9,7 +9,7 @@ interface NavProps {
 
 const navbar = (props: NavProps) => {
   return (
-    <div className={`h-18 w-full p-3` + props.className}>
+    <div className={`h-18 w-full p-3 ` + props.className}>
       <nav className="bg-black text-white font-bold flex flex-row items-center justify-between">
         <div className="justify-items-start flex flex-1 flex-row items-center">
           <Image
@@ -19,11 +19,14 @@ const navbar = (props: NavProps) => {
             height={64}
             className="invert"
           />
-          <div className="text-white ml-5">werkzeugkiste.</div>
+          <div className="text-white text-2xl ml-5">werkzeugkiste.</div>
         </div>
         <div className="flex flex-auto justify-center">
           {props.renderHomeLink ? (
-            <a href="#" className="justify-center">
+            <a
+              href="#"
+              className="justify-center text-2xl hover:underline hover:transition-underline hover:duration-300 hover:text-blue-400"
+            >
               home
             </a>
           ) : null}
@@ -31,7 +34,7 @@ const navbar = (props: NavProps) => {
         <div className="flex flex-auto justify-end">
           <a
             href="https://github.com/theoleuthardt/werkzeugkiste"
-            className="items-end mr-3"
+            className="items-end mr-3 text-2xl hover:underline hover:transition-underline hover:duration-300 hover:text-blue-400"
           >
             github
           </a>
