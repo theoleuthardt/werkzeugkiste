@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Werkzeugkiste",
-  description: "Collection of useful digital utilities",
+  title: "file-to-pdf",
+  description: "Converter for files to pdf format!",
 };
 
 export default function RootLayout({
