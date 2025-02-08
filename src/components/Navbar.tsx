@@ -8,7 +8,7 @@ interface NavProps {
 
 const navbar = (props: NavProps) => {
   return (
-    <div className="h-18 w-full p-3 border-2 border-white">
+    <div className="h-18 w-full p-3">
       <nav className="bg-black text-white font-bold flex flex-row items-center justify-between">
         <div className="justify-items-start flex flex-1 flex-row items-center">
           <Image
@@ -27,7 +27,7 @@ const navbar = (props: NavProps) => {
             </a>
           ) : null}
         </div>
-        <div className="flex flex-auto">
+        <div className="flex flex-auto justify-end">
           <a
             href="https://github.com/theoleuthardt/werkzeugkiste"
             className="items-end mr-3"
