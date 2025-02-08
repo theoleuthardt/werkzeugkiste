@@ -2,7 +2,7 @@
 
 **Werkzeugkiste** is a Next.js-based website that offers a collection of useful digital tools and converters.
 This platform is designed to provide users with a simple and efficient way to handle various tasks, such as converting
-files, calculating values, or using other handy digital utilities.
+files, generate content, or using other handy digital utilities. This page is made by two persons and privacy-focused.
 
 ## Tech-Stack
 
@@ -14,12 +14,15 @@ files, calculating values, or using other handy digital utilities.
 
 ## Implemented Tools
 
-- **File Converter**: Convert files between different formats.
-- **Image Converter**: Convert images between different formats.
-- **Color Converter**: Convert colors between different formats.
-- **Password Generator**: Generate secure passwords.
-- **Pomodoro Timer**: Use the Pomodoro technique to manage time.
+- **File-To-PDF**: Convert files between different formats.
+- **IMG-To-PNG**: Convert images between different formats.
+- **RGB-To-HEX**: Convert colors between different formats.
+- **Video-To-GIF**: Convert your video files to gifs.
 - **QR Code Generator**: Generate QR codes for URLs, text, or other data.
+- **Password Generator**: Generate secure passwords.
+- **Background-Remover**: Remove backgrounds from your images.
+- **Word-Counter**: Count words of your documents.
+- **Pomodoro Timer**: Use the Pomodoro technique to manage time.
 
 ## Installation
 
