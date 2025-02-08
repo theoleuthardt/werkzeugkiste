@@ -7,7 +7,7 @@ interface NavProps {
   renderHomeLink: boolean;
 }
 
-const navbar = (props: NavProps) => {
+const Navbar = (props: NavProps) => {
   return (
     <div className={`h-18 w-full p-3 ` + props.className}>
       <nav className="bg-black text-white font-bold flex flex-row items-center justify-between">
@@ -24,14 +24,14 @@ const navbar = (props: NavProps) => {
         <div className="flex flex-auto justify-center">
           {props.renderHomeLink ? (
             <a
-              href="#"
+              href="/"
               className="justify-center text-2xl hover:underline hover:transition-underline hover:duration-300 hover:text-blue-400"
             >
               home
             </a>
           ) : null}
         </div>
-        <div className="flex flex-auto justify-end">
+        <div className="flex flex-1 justify-end">
           <a
             href="https://github.com/theoleuthardt/werkzeugkiste"
             className="items-end mr-3 text-2xl hover:underline hover:transition-underline hover:duration-300 hover:text-blue-400"
@@ -44,4 +44,4 @@ const navbar = (props: NavProps) => {
   );
 };
 
-export default navbar;
+export default Navbar;

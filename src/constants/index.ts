@@ -1,38 +1,38 @@
 export const toolLinks = [
   {
-    title: "color-converter",
-    link: "/color-converter",
+    title: "file-to-pdf",
+    link: "/file-to-pdf",
   },
   {
-    title: "bg-remover",
-    link: "/bg-remover",
+    title: "img-to-png",
+    link: "/img-to-png",
   },
   {
-    title: "image-converter",
-    link: "/image-converter",
+    title: "rgb-to-hex",
+    link: "/rgb-to-hex",
   },
   {
-    title: "file converter",
-    link: "/file-converter",
-  },
-  {
-    title: "password-generator",
-    link: "/password-generator",
-  },
-  {
-    title: "pomodoro-timer",
-    link: "/pomodoro-timer",
+    title: "video-to-gif",
+    link: "/video-to-gif",
   },
   {
     title: "qr-code-generator",
     link: "/qr-code-generator",
   },
   {
+    title: "password-generator",
+    link: "/password-generator",
+  },
+  {
+    title: "bg-remover",
+    link: "/bg-remover",
+  },
+  {
     title: "word-counter",
     link: "/word-counter",
   },
   {
-    title: "video-to-gif",
-    link: "/video-to-gif",
+    title: "pomodoro-timer",
+    link: "/pomodoro-timer",
   },
 ];

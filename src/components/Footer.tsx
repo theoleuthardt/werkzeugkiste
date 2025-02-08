@@ -1,21 +1,21 @@
 import React from "react";
 
-interface NavProps {
+interface FooterProps {
   className?: string;
 }
 
-const navbar = (props: NavProps) => {
+const Footer = (props: FooterProps) => {
   return (
     <div className={`h-18 w-full p-3 ` + props.className}>
       <div className="text-md text-white font-bold flex flex-row items-center justify-center">
-        <text>made by</text>
+        <p>made by</p>
         <a
           className="mx-2 hover:underline hover:text-blue-400"
           href="https://github.com/AuriomTex"
         >
           Domi
         </a>
-        <text>and</text>
+        <p>and</p>
         <a
           className="mx-2 hover:underline hover:text-blue-400"
           href="https://github.com/theoleuthardt"
@@ -27,4 +27,4 @@ const navbar = (props: NavProps) => {
   );
 };
 
-export default navbar;
+export default Footer;
