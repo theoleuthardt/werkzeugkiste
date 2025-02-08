@@ -9,14 +9,15 @@ export default function Home() {
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <div className="grid grid-cols-3 gap-6">
           {toolLinks.map((tool) => (
-            <div
+            <a
               key={tool.title}
-              className="text-2xl border-2 border-white p-5 flex justify-center rounded-2xl shadow-md
+              href={tool.link}
+              className="text-2xl border-2 border-white p-6 flex justify-center rounded-2xl shadow-md
               shadow-white hover:scale-110 hover:transition-scale hover:duration-200
               hover:text-blue-400 hover:border-blue-400 hover:shadow-blue-400"
             >
-              <a href={tool.link}>{tool.title}</a>
-            </div>
+              {tool.title}
+            </a>
           ))}
         </div>
       </div>

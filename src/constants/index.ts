@@ -27,4 +27,12 @@ export const toolLinks = [
     title: "qr-code-generator",
     link: "/qr-code-generator",
   },
+  {
+    title: "word-counter",
+    link: "/word-counter",
+  },
+  {
+    title: "video-to-gif",
+    link: "/video-to-gif",
+  },
 ];
