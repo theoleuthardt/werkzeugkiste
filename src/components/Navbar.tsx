@@ -3,12 +3,13 @@ import Image from "next/image";
 import LOGO from "../assets/logo/icons8-toolbox-64.svg";
 
 interface NavProps {
+  className?: string;
   renderHomeLink: boolean;
 }
 
 const navbar = (props: NavProps) => {
   return (
-    <div className="h-18 w-full p-3">
+    <div className={`h-18 w-full p-3` + props.className}>
       <nav className="bg-black text-white font-bold flex flex-row items-center justify-between">
         <div className="justify-items-start flex flex-1 flex-row items-center">
           <Image
