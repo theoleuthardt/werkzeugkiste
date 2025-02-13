@@ -1,19 +1,28 @@
-"use client";
 import React from "react";
 
 interface ButtonProps {
   className?: string;
   content: string;
-  onClick?: Function;
+  onClick?: () => void;
+  visible?: boolean;
 }
 
-const Button = (props: ButtonProps) => {
+const Button = ({
+  className,
+  content,
+  onClick,
+  visible = true,
+}: ButtonProps) => {
   return (
     <button
-      className={`p-3 border-2 border-white rounded-xl ` + props.className}
-      onClick={() => props.onClick && props.onClick()}
+      className={
+        `p-3 border-2 border-white rounded-xl text-2xl hover:scale-110 hover:transition-scale hover:duration-200
+              hover:text-blue-400 hover:border-blue-400 ` + className
+      }
+      onClick={() => onClick && onClick()}
+      style={{ display: visible ? "block" : "none" }}
     >
-      {props.content}
+      {content}
     </button>
   );
 };
