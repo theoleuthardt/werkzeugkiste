@@ -9,11 +9,12 @@ import Link from "next/link";
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
   const [downloadUrl, setDownloadUrl] = useState<string>("");
-  const [showDownload, setShowDownload] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0]);
+      setDownloadUrl("");
     }
   };
 
@@ -25,6 +26,8 @@ export default function Home() {
 
     const formData = new FormData();
     formData.append("file", file);
+
+    setLoading(true);
 
     try {
       const response = await fetch("/api/libre-convert", {
@@ -39,10 +42,11 @@ export default function Home() {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       setDownloadUrl(url);
-      setShowDownload(true);
     } catch (error) {
       console.error("Error while converting:", error);
       alert("Error while converting");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,10 +68,22 @@ export default function Home() {
           onChange={handleFileChange}
         />
         <div className={"flex flex-row items-center gap-4 mt-4"}>
-          <Button content="convert" onClick={convertToPdf} />
-          <Link id="downloadPDF" href={downloadUrl}>
-            <Button content="download" visible={showDownload} />
-          </Link>
+          {downloadUrl ? (
+            <Link id="downloadPDF" href={downloadUrl}>
+              <Button content="download" />
+            </Link>
+          ) : (
+            <Button
+              content={
+                loading ? (
+                  <div className="h-10 w-10 border-8 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+                ) : (
+                  "convert"
+                )
+              }
+              onClick={convertToPdf}
+            />
+          )}
         </div>
       </div>
       <Footer />

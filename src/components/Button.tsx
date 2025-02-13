@@ -1,8 +1,8 @@
-import React from "react";
+import React, { JSX } from "react";
 
 interface ButtonProps {
   className?: string;
-  content: string;
+  content: string | JSX.Element;
   onClick?: () => void;
   visible?: boolean;
 }
