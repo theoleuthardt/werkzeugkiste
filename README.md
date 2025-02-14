@@ -6,23 +6,24 @@ files, generate content, or using other handy digital utilities. This page is ma
 
 ## Tech-Stack
 
-- **Next.js**: React framework for server-side rendering and static websites.
-- **React**: JavaScript library for building user interfaces.
+- **Next.js**: React framework for our frontend with server-side rendering and static content.
+- **React**: JavaScript library for building our user interfaces.
 - **TypeScript**: Typed JavaScript superset for improved code quality.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
-- **Docker**: Containerization platform for deployment.
+- **Fastify**: Low overhead NodeJS framework for our backend.
+- **Docker**: Containerization platform for deploying frontend and backend.
 
 ## Implemented Tools
 
-- **File-To-PDF**: Convert files between different formats.
-- **IMG-To-PNG**: Convert images between different formats.
-- **RGB-To-HEX**: Convert colors between different formats.
-- **Video-To-GIF**: Convert your video files to gifs.
-- **QR Code Generator**: Generate QR codes for URLs, text, or other data.
-- **Password Generator**: Generate secure passwords.
-- **Background-Remover**: Remove backgrounds from your images.
-- **Word-Counter**: Count words of your documents.
-- **Pomodoro Timer**: Use the Pomodoro technique to manage time.
+- **doc-converter**: Convert documents between different formats.
+- **img-converter**: Convert images between different formats.
+- **rgb-to-hex**: Convert colors between different formats.
+- **data-visualizer**: Visualize your data from table to chart.
+- **qr-code-generator**: Generate QR codes for URLs, text, or other data.
+- **password-generator**: Generate secure passwords.
+- **bg-remover**: Remove backgrounds from your images.
+- **word-counter**: Count words of your documents.
+- **pomodoro-timer**: Use the Pomodoro technique to manage time.
 
 ## Installation
 
