@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import Button from "@/components/Button";
+import Button from "../../components/Button";
 import Link from "next/link";
 
 export default function Home() {
@@ -30,10 +30,13 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/libre-convert", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        process.env.backend_url + "/api/libre-convert",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
       if (!response.ok) {
         return new Error(`Error: ${response.statusText}`);
@@ -50,17 +53,33 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (file) {
-      console.log(file);
-    }
-  }, [file]);
-
   return (
     <div className="h-screen w-screen bg-black text-white font-noto flex flex-col items-center">
       <Navbar renderHomeLink={true} />
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <h2 className="text-5xl font-bold text-white mb-16">doc-to-pdf</h2>
+        <table className="border-2 border-white text-xl rounded-xl mb-16">
+          <thead>
+            <tr>
+              <th>Input Format</th>
+              <th>Output Format</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>docx</td>
+              <td>pdf</td>
+            </tr>
+            <tr>
+              <td>doc</td>
+              <td>pdf</td>
+            </tr>
+            <tr>
+              <td>odt</td>
+              <td>pdf</td>
+            </tr>
+          </tbody>
+        </table>
         <input
           type="file"
           className="border-2 border-white p-3 rounded-xl text-center text-white"
