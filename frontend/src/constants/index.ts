@@ -1,7 +1,7 @@
 export const toolLinks = [
   {
-    title: "file-to-pdf",
-    link: "/file-to-pdf",
+    title: "doc-to-pdf",
+    link: "/doc-to-pdf",
   },
   {
     title: "img-to-png",

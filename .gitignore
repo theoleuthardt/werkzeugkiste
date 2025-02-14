@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/frontend/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -14,11 +15,11 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+frontend/.next/
+frontend/out/
 
 # production
-/build
+frontend/build
 
 # misc
 .DS_Store
@@ -38,4 +39,4 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+frontend/next-env.d.ts
