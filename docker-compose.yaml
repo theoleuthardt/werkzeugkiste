@@ -1,13 +1,32 @@
 services:
-  app:
+  frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
-    container_name: werkzeugkiste
+    container_name: werkzeugkiste-frontend
     environment:
-      NODE_ENV: production
-      HOSTNAME: 0.0.0.0
-      PORT: 3000
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
+      - backend_url=http://backend:4000
     ports:
       - "3000:3000"
     restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: werkzeugkiste-backend
+    environment:
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+      - PORT=4000
+      - CORS_ORIGIN=http://frontend:3000
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge
