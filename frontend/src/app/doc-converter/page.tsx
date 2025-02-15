@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import Link from "next/link";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import Dropdown from "@/components/Dropdown";
 
 export default function DocConverter() {
   const [file, setFile] = useState<File | null>(null);
@@ -60,12 +61,16 @@ export default function DocConverter() {
       <Navbar renderHomeLink={true} />
       <div className="w-screen h-auto min-h-[calc(100vh-80px-60px)] flex flex-1 flex-col items-center justify-center">
         <h2 className="text-5xl font-bold text-white mb-16">doc-converter</h2>
-        <input
-          type="file"
-          className="border-2 border-white p-3 rounded-xl text-center text-white"
-          id="documentUpload"
-          onChange={handleFileChange}
-        />
+        <div className="h-36 flex flex-row items-center justify-center gap-20">
+          <input
+            type="file"
+            className="h-14 border-2 border-white p-3 rounded-xl text-center text-white"
+            id="documentUpload"
+            onChange={handleFileChange}
+          />
+          {/* TODO: Fix Dropdown menu placement */}
+          <Dropdown content="output format" className="h-14" />
+        </div>
         <div className={"flex flex-row items-center gap-4 mt-4 mb-16"}>
           {downloadUrl ? (
             <Link id="downloadPDF" href={downloadUrl}>
@@ -84,10 +89,6 @@ export default function DocConverter() {
             />
           )}
         </div>
-        {
-          // TODO: Fix Table Head widths (fixed and the same as the max body width)
-          // TODO: Add hover animation to table head (scale-110, blue text, blue border)
-        }
         <div className="overflow-hidden text-xl rounded-lg border border-white mb-16 transition-all duration-300 ease-in-out hover:border-blue-400">
           <div
             className="cursor-pointer flex justify-between items-center"
