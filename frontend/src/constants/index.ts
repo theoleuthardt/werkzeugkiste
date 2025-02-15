@@ -1,19 +1,19 @@
 export const toolLinks = [
   {
-    title: "doc-to-pdf",
-    link: "/doc-to-pdf",
+    title: "doc-converter",
+    link: "/doc-converter",
   },
   {
-    title: "img-to-png",
-    link: "/img-to-png",
+    title: "img-converter",
+    link: "/img-converter",
   },
   {
     title: "rgb-to-hex",
     link: "/rgb-to-hex",
   },
   {
-    title: "video-to-gif",
-    link: "/video-to-gif",
+    title: "data-visualizer",
+    link: "/data-visualizer",
   },
   {
     title: "qr-code-generator",
