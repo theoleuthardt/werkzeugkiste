@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -7,17 +6,41 @@ import Button from "../../components/Button";
 import Link from "next/link";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Dropdown from "@/components/Dropdown";
+import { FileFormatsTable, outputFileFormats } from "@/constants";
 
 export default function DocConverter() {
   const [file, setFile] = useState<File | null>(null);
   const [downloadUrl, setDownloadUrl] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [tableOpen, setTableOpen] = useState(false);
+  const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
+  const [selectedOutputFormat, setSelectedOutputFormat] = useState<string | "">(
+    "",
+  );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      setFile(event.target.files[0]);
+      const selectedFile = event.target.files[0];
+      const fileExtension = selectedFile.name.split(".").pop()?.toLowerCase();
+
+      const isSupported = outputFileFormats.some((format) =>
+        format.input.toLowerCase().includes(fileExtension || ""),
+      );
+
+      if (!isSupported) {
+        console.error("Not supported file uploaded!");
+        alert("File format not supported!");
+        event.target.value = "";
+        return;
+      }
+
+      setFile(selectedFile);
       setDownloadUrl("");
+
+      const matchedFormat = outputFileFormats.find((format) =>
+        format.input.toLowerCase().includes(fileExtension || ""),
+      );
+      setFilteredOptions(matchedFormat ? matchedFormat.output : []);
     }
   };
 
@@ -29,6 +52,7 @@ export default function DocConverter() {
 
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("outputFormat", selectedOutputFormat);
 
     setLoading(true);
 
@@ -46,7 +70,9 @@ export default function DocConverter() {
       }
 
       const blob = await response.blob();
+      console.log("Blob:", blob);
       const url = window.URL.createObjectURL(blob);
+      console.log("Download URL:", url);
       setDownloadUrl(url);
     } catch (error) {
       console.error("Error while converting:", error);
@@ -61,15 +87,26 @@ export default function DocConverter() {
       <Navbar renderHomeLink={true} />
       <div className="w-screen h-auto min-h-[calc(100vh-80px-60px)] flex flex-1 flex-col items-center justify-center">
         <h2 className="text-5xl font-bold text-white mb-16">doc-converter</h2>
-        <div className="h-36 flex flex-row items-center justify-center gap-20">
+        <div className="h-36 flex flex-row items-center justify-center gap-4">
           <input
             type="file"
-            className="h-14 border-2 border-white p-3 rounded-xl text-center text-white"
+            className="h-16 border-2 border-white p-3 rounded-xl text-2xl text-center text-white"
             id="documentUpload"
             onChange={handleFileChange}
           />
-          {/* TODO: Fix Dropdown menu placement */}
-          <Dropdown content="output format" className="h-14" />
+          <Dropdown
+            content={
+              file
+                ? `Convert to: ${selectedOutputFormat}`
+                : "output file format"
+            }
+            options={filteredOptions.length > 0 ? filteredOptions : [""]}
+            onClick={(event) => {
+              const selectedFormat =
+                event.currentTarget.textContent?.trim() || "";
+              setSelectedOutputFormat(selectedFormat);
+            }}
+          />
         </div>
         <div className={"flex flex-row items-center gap-4 mt-4 mb-16"}>
           {downloadUrl ? (
@@ -121,108 +158,16 @@ export default function DocConverter() {
           >
             <table className="w-full h-auto text-left border-collapse border-white">
               <tbody>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .doc (MS Word)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .docx, .odt, .txt, .rtf, .html, .epub
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .docx (MS Word)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .odt, .txt, .rtf, .html, .epub
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .odt (OpenDocument Text)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .doc, .docx, .txt, .rtf, .html, .epub
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .rtf (Rich Text Format)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .doc, .docx, .odt, .txt, .html
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">.txt (Text)</td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .doc, .docx, .odt, .txt, .html
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .html (Webseite)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .doc, .docx, .odt, .rtf, .txt
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .epub (E-Book)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .doc, .docx, .odt, .rtf, .txt
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .xls (MS Excel)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .xlsx, .ods, .csv
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .xlsx (MS Excel)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">.pdf, .xls, .ods, .csv</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .ods (OpenDocument Spreadsheet)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .xls, .xlsx, .csv
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .csv (Comma-Separated Values)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">
-                    .pdf, .xls, .xlsx, .ods
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .ppt (MS PowerPoint)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">.pdf, .pptx, .odp</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .pptx (MS PowerPoint)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">.pdf, .ppt, .odp</td>
-                </tr>
-                <tr className="pb-10">
-                  <td className="min-w-96 px-6 py-4 border-r">
-                    .odp (OpenDocument Presentation)
-                  </td>
-                  <td className="min-w-96 px-6 py-4">.pdf, .ppt, .pptx</td>
-                </tr>
+                {FileFormatsTable.map((format) => (
+                  <tr key={format.input} className="border-b">
+                    <td className="min-w-96 px-6 py-4 border-r">
+                      {format.input}
+                    </td>
+                    <td className="min-w-96 px-6 py-4">
+                      {format.output.join(", ")}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-// TODO: Adjust the width of the option list to match the width of the button
-// TODO: Dynamic rendering of options
-
 interface DropdownProps {
   content: string;
+  options: string[];
   className?: string;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const Dropdown = (props: DropdownProps) => {
@@ -17,16 +16,17 @@ const Dropdown = (props: DropdownProps) => {
     setIsOpen(!isOpen);
   };
 
-  const closeDropdown = () => {
+  const closeDropdown = (event: React.MouseEvent<HTMLAnchorElement>) => {
     setIsOpen(false);
+    if (props.onClick) props.onClick(event);
   };
 
   return (
-    <div className={`w-full py-6 pb-8 ${props.className}`}>
-      <div className="relative inline-block">
+    <div className={`w-full ${props.className}`}>
+      <div className="relative">
         <button
           type="button"
-          className="px-4 py-2 text-white bg-black rounded-lg text-2xl inline-flex items-center
+          className="h-16 px-4 py-2 text-white bg-black rounded-lg text-2xl inline-flex items-center
           border-white border-2 hover:text-blue-400 hover:border-blue-400"
           onClick={toggleDropdown}
         >
@@ -48,41 +48,27 @@ const Dropdown = (props: DropdownProps) => {
           </svg>
         </button>
         <div
-          className={`origin-top-right absolute right-0 mt-1 rounded-lg shadow-lg ring-1 ring-white
-        ring-opacity-5 border-2 border-white transition-all duration-500 ease-in-out ${isOpen ? "opacity-100" : "opacity-0"}`}
+          className={`absolute left-0 mt-2 w-full rounded-lg shadow-lg ring-1 ring-white
+                      ring-opacity-5 border-2 border-white transition-all duration-500 ease-in-out text-center
+                      ${isOpen ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible"}`}
         >
           <ul
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
+            className="max-h-[164px] w-full overflow-y-auto"
           >
-            <li>
-              <Link
-                href="#"
-                className="block px-4 py-2 rounded-lg hover:text-blue-400 hover:border-2 hover:border-blue-400"
-                onClick={closeDropdown}
-              >
-                Option 1
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="block px-4 py-2 rounded-lg hover:text-blue-400 hover:border-2 hover:border-blue-400"
-                onClick={closeDropdown}
-              >
-                Option 2
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="block px-4 py-2 rounded-lg hover:text-blue-400 hover:border-2 hover:border-blue-400"
-                onClick={closeDropdown}
-              >
-                Option 3
-              </Link>
-            </li>
+            {props.options?.map((option) => (
+              <li key={option}>
+                <Link
+                  href="#"
+                  className="block px-4 py-2 rounded-lg hover:text-blue-400 hover:border-2 hover:border-blue-400"
+                  onClick={closeDropdown}
+                >
+                  {option}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
