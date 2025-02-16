@@ -5,7 +5,7 @@ import { libreConvert } from "./src/routes/libreconvert.route";
 
 const app = Fastify({ logger: true });
 
-app.register(cors, { origin: "*" });
+app.register(cors, { origin: "*", exposedHeaders: 'Content-Disposition' });
 app.register(multipart);
 app.register(libreConvert);
 
