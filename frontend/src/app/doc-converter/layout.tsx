@@ -4,7 +4,7 @@ import { toolLinks } from "@/constants";
 
 export const metadata: Metadata = {
   title: toolLinks[0].title,
-  description: "Converter for documents to pdf format!",
+  description: "Converter for documents!",
 };
 
 export default function RootLayout({
