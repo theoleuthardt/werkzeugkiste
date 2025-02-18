@@ -1,6 +1,6 @@
 # Werkzeugkiste
 
-**Werkzeugkiste** is a Next.js-based website that offers a collection of useful digital tools and converters.
+**Werkzeugkiste** is a website that offers a collection of useful digital tools and converters.
 This platform is designed to provide users with a simple and efficient way to handle various tasks, such as converting
 files, generate content, or using other handy digital utilities. This page is made by two persons and privacy-focused.
 
@@ -33,30 +33,15 @@ To install and run the project locally, follow these steps:
    ```bash
    git clone https://github.com/theoleuthardt/werkzeugkiste.git
    cd werkzeugkiste
-
-   ```
-2. **Install the dependencies**:
-
-   ```bash
-    npm install
-
    ```
 
-3. **Start the website locally with npm**:
-   ```bash
-   npm run start
-   ```
-
-**or**
-
-3. **Start the website with docker compose**:
+2. **Start the website with docker compose**:
 
    ```bash
    docker compose up -d
-
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Open** [http://localhost:3000](http://localhost:3000) in your browser to see the website.
 
 ## Authors
 
