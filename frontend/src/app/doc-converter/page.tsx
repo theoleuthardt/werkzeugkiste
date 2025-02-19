@@ -3,14 +3,12 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Button from "../../components/Button";
-import Link from "next/link";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Dropdown from "@/components/Dropdown";
 import { FileFormatsTable, outputFileFormats } from "@/constants";
 
 export default function DocConverter() {
   const [file, setFile] = useState<File | null>(null);
-  const [downloadUrl, setDownloadUrl] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [tableOpen, setTableOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
@@ -19,6 +17,8 @@ export default function DocConverter() {
   );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
     if (event.target.files && event.target.files.length > 0) {
       const selectedFile = event.target.files[0];
       const fileExtension = selectedFile.name.split(".").pop()?.toLowerCase();
@@ -28,14 +28,13 @@ export default function DocConverter() {
       );
 
       if (!isSupported) {
-        console.error("Not supported file uploaded!");
         alert("File format not supported!");
         event.target.value = "";
         return;
       }
 
       setFile(selectedFile);
-      setDownloadUrl("");
+      setSelectedOutputFormat("");
 
       const matchedFormat = outputFileFormats.find((format) =>
         format.input.toLowerCase().includes(fileExtension || ""),
@@ -66,17 +65,26 @@ export default function DocConverter() {
       );
 
       if (!response.ok) {
-        return new Error(`Error: ${response.statusText}`);
+        console.error(`Error: ${response.statusText}`);
       }
 
       const blob = await response.blob();
-      console.log("Blob:", blob);
       const url = window.URL.createObjectURL(blob);
-      console.log("Download URL:", url);
-      setDownloadUrl(url);
+      const filename = file.name.split(".")[0];
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${filename}${selectedOutputFormat}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 5000);
     } catch (error) {
       console.error("Error while converting:", error);
-      alert("Error while converting");
+      alert("Error while converting!");
     } finally {
       setLoading(false);
     }
@@ -109,22 +117,16 @@ export default function DocConverter() {
           />
         </div>
         <div className={"flex flex-row items-center gap-4 mt-4 mb-16"}>
-          {downloadUrl ? (
-            <Link id="downloadPDF" href={downloadUrl}>
-              <Button content="download" />
-            </Link>
-          ) : (
-            <Button
-              content={
-                loading ? (
-                  <div className="h-10 w-10 border-8 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
-                ) : (
-                  "convert"
-                )
-              }
-              onClick={convertDoc}
-            />
-          )}
+          <Button
+            content={
+              loading ? (
+                <div className="h-10 w-10 border-8 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
+              ) : (
+                "convert"
+              )
+            }
+            onClick={convertDoc}
+          />
         </div>
         <div className="overflow-hidden text-xl rounded-lg border border-white mb-16 transition-all duration-300 ease-in-out hover:border-blue-400">
           <div

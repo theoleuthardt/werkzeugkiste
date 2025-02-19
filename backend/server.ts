@@ -6,7 +6,12 @@ import { colorConvert } from "./src/routes/colorconvert.route";
 
 const app = Fastify({ logger: true });
 
-app.register(cors, { origin: "*", exposedHeaders: 'Content-Disposition' });
+app.register(cors, {
+  origin: "*",
+  exposedHeaders: "Content-Disposition",
+  methods: "POST",
+  allowedHeaders: "Content-Type",
+});
 app.register(multipart);
 app.register(libreConvert);
 app.register(colorConvert);
