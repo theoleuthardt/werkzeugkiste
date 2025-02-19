@@ -19,6 +19,8 @@ export default function DocConverter() {
   );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
     if (event.target.files && event.target.files.length > 0) {
       const selectedFile = event.target.files[0];
       const fileExtension = selectedFile.name.split(".").pop()?.toLowerCase();
@@ -28,7 +30,6 @@ export default function DocConverter() {
       );
 
       if (!isSupported) {
-        console.error("Not supported file uploaded!");
         alert("File format not supported!");
         event.target.value = "";
         return;
@@ -70,9 +71,7 @@ export default function DocConverter() {
       }
 
       const blob = await response.blob();
-      console.log("Blob:", blob);
       const url = window.URL.createObjectURL(blob);
-      console.log("Download URL:", url);
       setDownloadUrl(url);
     } catch (error) {
       console.error("Error while converting:", error);
