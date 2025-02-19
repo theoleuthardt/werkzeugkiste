@@ -4,7 +4,7 @@ import { toolLinks } from "@/constants";
 
 export const metadata: Metadata = {
   title: toolLinks[2].title,
-  description: "Converter for rgb to hex color format!",
+  description: "Generator for secure strong passwords!",
 };
 
 export default function RootLayout({
