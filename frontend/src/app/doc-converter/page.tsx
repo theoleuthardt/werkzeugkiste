@@ -37,6 +37,7 @@ export default function DocConverter() {
 
       setFile(selectedFile);
       setDownloadUrl("");
+      setSelectedOutputFormat("");
 
       const matchedFormat = outputFileFormats.find((format) =>
         format.input.toLowerCase().includes(fileExtension || ""),
