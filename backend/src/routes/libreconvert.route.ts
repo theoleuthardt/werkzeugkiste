@@ -69,6 +69,7 @@ export async function libreConvert(app: FastifyInstance) {
             "Content-Disposition",
             `attachment; filename="converted${outputFileExt}"`,
           )
+          .status(200)
           .send(convertedBuffer);
       } catch (error) {
         console.error("Convert error:", error);
