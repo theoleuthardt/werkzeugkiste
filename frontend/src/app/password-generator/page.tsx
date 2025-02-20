@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 
-export default function RgbToHex() {
+export default function PasswordGenerator() {
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
 
