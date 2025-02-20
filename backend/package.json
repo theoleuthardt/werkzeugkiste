@@ -18,9 +18,11 @@
     "fastify": "^5.2.1",
     "fastify-cors": "^6.0.3",
     "fastify-multipart": "^5.3.1",
-    "libreoffice-convert": "^1.6.0"
+    "libreoffice-convert": "^1.6.0",
+    "luxon": "^3.5.0"
   },
   "devDependencies": {
+    "@types/luxon": "^3.4.2",
     "@types/node": "^22.13.4",
     "prettier": "3.5.1",
     "ts-node": "^10.9.2",
