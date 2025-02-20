@@ -3,7 +3,7 @@ import cors from "@fastify/cors";
 import multipart from "@fastify/multipart";
 import { libreConvert } from "./src/routes/libreconvert.route";
 import { colorConvert } from "./src/routes/colorconvert.route";
-import {passwordGenerate} from "./src/routes/passwordgenerate.route";
+import { passwordGenerate } from "./src/routes/passwordgenerate.route";
 import { regexTest } from "./src/routes/regextest.route";
 
 const app = Fastify({ logger: true });

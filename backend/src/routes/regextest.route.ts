@@ -20,7 +20,9 @@ export async function regexTest(app: FastifyInstance) {
 
         // Überprüfe, ob die Felder regex und test vorhanden sind
         if (!data.regex || !data.test) {
-          return reply.status(400).send({ error: "Regex or test string missing!" });
+          return reply
+            .status(400)
+            .send({ error: "Regex or test string missing!" });
         }
 
         // Versuche, den regulären Ausdruck zu erstellen
@@ -28,7 +30,9 @@ export async function regexTest(app: FastifyInstance) {
         try {
           regexPattern = new RegExp(data.regex);
         } catch (e) {
-          return reply.status(400).send({ error: "Invalid regular expression!" });
+          return reply
+            .status(400)
+            .send({ error: "Invalid regular expression!" });
         }
 
         // Teste den Eingabestring gegen das Regex

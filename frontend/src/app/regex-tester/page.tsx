@@ -6,12 +6,10 @@ import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 
 export default function RgbToHex() {
-
   const [loading, setLoading] = useState(false);
   const [output, setOutput] = useState("");
 
   const testRegex = async () => {
-
     setLoading(true);
 
     const regex = (document.getElementById("regex") as HTMLInputElement).value;
@@ -25,7 +23,7 @@ export default function RgbToHex() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({  regex: regex, test: test}),
+          body: JSON.stringify({ regex: regex, test: test }),
         },
       );
       if (!response.ok) {
@@ -34,7 +32,6 @@ export default function RgbToHex() {
       const output: string = await response.text();
       console.log(output);
       setOutput(output);
-
     } catch (error) {
       console.error("Error while converting:", error);
       alert("Error while converting");
@@ -58,16 +55,20 @@ export default function RgbToHex() {
         <h2 className="text-5xl font-bold text-white mb-16">regex-tester</h2>
         <div className="border-2 border-white p-3 rounded-xl text-center text-white flex flex-col justify-between">
           <div>
-          <label className="mr-2 m" htmlFor="regex">regex:</label>
-          <input
-            type="text"
-            id="regex"
-            name="regex"
-            className="field-sizing-content bg-black border-1 border-white text-center mb-3"
-          />
+            <label className="mr-2 m" htmlFor="regex">
+              regex:
+            </label>
+            <input
+              type="text"
+              id="regex"
+              name="regex"
+              className="field-sizing-content bg-black border-1 border-white text-center mb-3"
+            />
           </div>
           <div>
-          <label className="mr-2" htmlFor="test">test string:</label>
+            <label className="mr-2" htmlFor="test">
+              test string:
+            </label>
             <input
               type="text"
               id="test"
@@ -87,16 +88,12 @@ export default function RgbToHex() {
             }
             onClick={testRegex}
           />
-          <Button
-            content="clear"
-            onClick={clearInAndOutput}
-          />
-          </div>
+          <Button content="clear" onClick={clearInAndOutput} />
+        </div>
         <div className="p-3 rounded-xl text-center">
-          <output
-            id="output"
-            className="text-blue-400 text-3xl"
-          >{output}</output>
+          <output id="output" className="text-blue-400 text-3xl">
+            {output}
+          </output>
         </div>
       </div>
       <Footer />

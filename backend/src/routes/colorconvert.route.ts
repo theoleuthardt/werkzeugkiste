@@ -18,7 +18,8 @@ export async function colorConvert(app: FastifyInstance) {
         if (!data) {
           return reply.status(400).send({ error: "No RGB declared!" });
         }
-        const hex = (`#${(+data.red).toString(16).padStart(2, "0")}${(+data.green).toString(16).padStart(2, "0")}${(+data.blue).toString(16).padStart(2, "0")}`).toUpperCase();
+        const hex =
+          `#${(+data.red).toString(16).padStart(2, "0")}${(+data.green).toString(16).padStart(2, "0")}${(+data.blue).toString(16).padStart(2, "0")}`.toUpperCase();
         reply.header("Content-Type", "text/plain").status(200).send(hex);
       } catch (error) {
         console.error("Convert error:", error);
