@@ -4,8 +4,8 @@ export const toolLinks = [
     link: "/doc-converter",
   },
   {
-    title: "img-converter",
-    link: "/img-converter",
+    title: "tmz-converter",
+    link: "/tmz-converter",
   },
   {
     title: "rgb-to-hex",
@@ -32,8 +32,8 @@ export const toolLinks = [
     link: "/word-counter",
   },
   {
-    title: "pomodoro-timer",
-    link: "/pomodoro-timer",
+    title: "video-to-audio",
+    link: "/video-to-audio",
   },
 ];
 
