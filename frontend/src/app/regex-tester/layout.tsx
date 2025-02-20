@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { toolLinks } from "@/constants";
 
 export const metadata: Metadata = {
-  title: toolLinks[2].title,
+  title: toolLinks[3].title,
   description: "Tester for regular expressions!",
 };
 

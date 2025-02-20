@@ -1,7 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
 interface RequestBody {
-  input: string;
+  regex: string;
+  test: string;
 }
 
 export async function regexTest(app: FastifyInstance) {
@@ -16,22 +17,25 @@ export async function regexTest(app: FastifyInstance) {
         if (!data) {
           return reply.status(400).send({ error: "No Regex declared!" });
         }
-        const regexPattern = data.input;
 
-        // Überprüfe, ob der Regex-Pattern korrekt ist
-        let regex: RegExp;
+        // Überprüfe, ob die Felder regex und test vorhanden sind
+        if (!data.regex || !data.test) {
+          return reply.status(400).send({ error: "Regex or test string missing!" });
+        }
+
+        // Versuche, den regulären Ausdruck zu erstellen
+        let regexPattern;
         try {
-          regex = new RegExp(regexPattern);
+          regexPattern = new RegExp(data.regex);
         } catch (e) {
           return reply.status(400).send({ error: "Invalid regular expression!" });
         }
 
-        // Teste den Regex
-        const result = regex.test(data.input);
+        // Teste den Eingabestring gegen das Regex
+        const result = regexPattern.test(data.test);
 
-        // Erstelle eine Ausgabe basierend auf dem Test-Ergebnis
+        // Erstelle die Antwort basierend auf dem Testergebnis
         let output = "";
-
         if (result) {
           output = `The input matches the regular expression!`;
         } else {

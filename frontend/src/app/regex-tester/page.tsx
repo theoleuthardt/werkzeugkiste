@@ -14,7 +14,8 @@ export default function RgbToHex() {
 
     setLoading(true);
 
-    const input = (document.getElementById("input") as HTMLInputElement).value;
+    const regex = (document.getElementById("regex") as HTMLInputElement).value;
+    const test = (document.getElementById("test") as HTMLInputElement).value;
 
     try {
       const response = await fetch(
@@ -24,7 +25,7 @@ export default function RgbToHex() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({  input: input}),
+          body: JSON.stringify({  regex: regex, test: test}),
         },
       );
       if (!response.ok) {
@@ -44,23 +45,36 @@ export default function RgbToHex() {
 
   const clearInAndOutput = () => {
     setOutput("");
-    const input = document.getElementById("input") as HTMLInputElement;
-    input.value = "";
+    const regex = document.getElementById("regex") as HTMLInputElement;
+    const test = document.getElementById("test") as HTMLInputElement;
+    test.value = "";
+    regex.value = "";
   };
 
   return (
     <div className="h-screen w-screen bg-black text-white font-noto flex flex-col items-center">
       <Navbar renderHomeLink={true} />
       <div className="w-screen h-screen flex flex-col items-center justify-center">
-        <h2 className="text-5xl font-bold text-white mb-16">password-generator</h2>
-        <div className="border-2 border-white p-3 rounded-xl text-center text-white flex flex-row justify-between">
-          <label className="mr-2" htmlFor="input">input:</label>
+        <h2 className="text-5xl font-bold text-white mb-16">regex-tester</h2>
+        <div className="border-2 border-white p-3 rounded-xl text-center text-white flex flex-col justify-between">
+          <div>
+          <label className="mr-2 m" htmlFor="regex">regex:</label>
           <input
             type="text"
-            id="input"
-            name="input"
-            className="field-sizing-content bg-black border-1 border-white text-center"
+            id="regex"
+            name="regex"
+            className="field-sizing-content bg-black border-1 border-white text-center mb-3"
           />
+          </div>
+          <div>
+          <label className="mr-2" htmlFor="test">test string:</label>
+            <input
+              type="text"
+              id="test"
+              name="test"
+              className="field-sizing-content bg-black border-1 border-white text-center"
+            />
+          </div>
         </div>
         <div className={"flex flex-row items-center gap-4 mt-4 mb-16"}>
           <Button
