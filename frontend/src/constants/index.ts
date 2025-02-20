@@ -12,8 +12,8 @@ export const toolLinks = [
     link: "/rgb-to-hex",
   },
   {
-    title: "data-visualizer",
-    link: "/data-visualizer",
+    title: "regex-tester",
+    link: "/regex-tester",
   },
   {
     title: "qr-code-generator",

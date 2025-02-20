@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { toolLinks } from "@/constants";
 
 export const metadata: Metadata = {
-  title: toolLinks[5].title,
-  description: "Generator for secure strong passwords!",
+  title: toolLinks[3].title,
+  description: "Tester for regular expressions!",
 };
 
 export default function RootLayout({

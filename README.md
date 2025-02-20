@@ -30,6 +30,7 @@ files, generate content, or using other handy digital utilities. This page is ma
 To install and run the project locally, follow these steps:
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/theoleuthardt/werkzeugkiste.git
    cd werkzeugkiste
