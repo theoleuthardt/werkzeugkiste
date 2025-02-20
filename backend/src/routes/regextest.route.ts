@@ -18,14 +18,12 @@ export async function regexTest(app: FastifyInstance) {
           return reply.status(400).send({ error: "No Regex declared!" });
         }
 
-        // Überprüfe, ob die Felder regex und test vorhanden sind
         if (!data.regex || !data.test) {
           return reply
             .status(400)
             .send({ error: "Regex or test string missing!" });
         }
 
-        // Versuche, den regulären Ausdruck zu erstellen
         let regexPattern;
         try {
           regexPattern = new RegExp(data.regex);
@@ -35,10 +33,8 @@ export async function regexTest(app: FastifyInstance) {
             .send({ error: "Invalid regular expression!" });
         }
 
-        // Teste den Eingabestring gegen das Regex
         const result = regexPattern.test(data.test);
-
-        // Erstelle die Antwort basierend auf dem Testergebnis
+        
         let output = "";
         if (result) {
           output = `The input matches the regular expression!`;
