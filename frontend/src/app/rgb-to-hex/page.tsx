@@ -71,7 +71,7 @@ export default function RgbToHex() {
         <h2 className="text-5xl font-bold text-white mb-16">rgb-to-hex</h2>
         <div className="border-2 border-white p-3 rounded-xl text-center text-white">
           <label className="mr-2" htmlFor="red">
-            Red:
+            red:
           </label>
           <input
             type="number"
@@ -83,7 +83,7 @@ export default function RgbToHex() {
             onInput={checkInput}
           />
           <label className="mx-2 text-white" htmlFor="green">
-            Green:
+            green:
           </label>
           <input
             type="number"
@@ -95,7 +95,7 @@ export default function RgbToHex() {
             onChange={checkInput}
           />
           <label className="mx-2" htmlFor="blue">
-            Blue:
+            blue:
           </label>
           <input
             type="number"

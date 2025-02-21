@@ -34,12 +34,12 @@ export async function regexTest(app: FastifyInstance) {
         }
 
         const result = regexPattern.test(data.test);
-        
+
         let output = "";
         if (result) {
-          output = `The input matches the regular expression!`;
+          output = "the input matches the regular expression!";
         } else {
-          output = `The input does not match the regular expression.`;
+          output = "the input does not match the regular expression.";
         }
 
         reply.header("Content-Type", "text/plain").status(200).send(output);
