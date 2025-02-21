@@ -16,14 +16,14 @@ files, generate content, or using other handy digital utilities. This page is ma
 ## Implemented Tools
 
 - **doc-converter**: Convert documents between different formats.
-- **img-converter**: Convert images between different formats.
+- **tmz-converter**: Convert between different timezones.
 - **rgb-to-hex**: Convert colors between different formats.
 - **qr-code-generator**: Generate QR codes for URLs, text, or other data.
 - **password-generator**: Generate secure passwords.
 - **regex-tester**: Test and validate your regular expressions.
 - **bg-remover**: Remove backgrounds from your images.
 - **word-counter**: Count words of your documents.
-- **pomodoro-timer**: Use the Pomodoro technique to manage time.
+- **video-to-audio**: Upload a video and extract your audio.
 
 ## Installation
 
