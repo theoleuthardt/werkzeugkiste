@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import QRCode from "qrcode";
+import * as QRCode from "qrcode";
 
 interface RequestBody {
-  text: string;
+  qrcodeContent: string;
 }
 
 export async function generateQRCode(app: FastifyInstance) {
@@ -14,19 +14,26 @@ export async function generateQRCode(app: FastifyInstance) {
     ) => {
       const data = request.body;
 
-      if (!data) {
-        return reply.status(400).send({ error: "Missing data parameter" });
+      if (!data.qrcodeContent) {
+        return reply.status(400).send({ error: "Missing text parameter" });
+      } else if (data.qrcodeContent === "") {
+        return reply
+          .status(400)
+          .send({ error: "Text parameter cannot be empty" });
+      } else if (data.qrcodeContent.length > 1000) {
+        return reply.status(400).send({ error: "Text parameter too long" });
       }
 
       try {
-        const qrCodeDataUrl = QRCode.toDataURL(data.text);
+        const qrCodeUrl = await QRCode.toDataURL(data.qrcodeContent);
+        console.log("QR Code generated:", qrCodeUrl);
         return reply
           .header("Content-Type", "application/json")
           .status(200)
-          .send({ qrCode: qrCodeDataUrl });
+          .send({ qrCode: qrCodeUrl });
       } catch (error) {
         console.error("QR Code generation error:", error);
-        reply.status(500).send({ error: "Error generating QR code" });
+        return reply.status(500).send({ error: "Error generating QR code!" });
       }
     },
   );
