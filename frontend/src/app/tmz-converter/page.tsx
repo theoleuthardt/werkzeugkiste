@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 
-export default function DocConverter() {
+export default function TMZConverter() {
   const [loading, setLoading] = useState(false);
   const [convertedTMZ, setConvertedTMZ] = useState("");
 

@@ -6,6 +6,7 @@ import { colorConvert } from "./src/routes/colorconvert.route";
 import { passwordGenerate } from "./src/routes/passwordgenerate.route";
 import { regexTest } from "./src/routes/regextest.route";
 import { tmzConvert } from "./src/routes/tmzconvert.route";
+import { generateQRCode } from "./src/routes/generateqrcode.route";
 import { wordCounter } from "./src/routes/wordcounter.route";
 
 const app = Fastify({ logger: true });
@@ -22,6 +23,7 @@ app.register(colorConvert);
 app.register(passwordGenerate);
 app.register(regexTest);
 app.register(tmzConvert);
+app.register(generateQRCode);
 app.register(wordCounter);
 
 const PORT = process.env.PORT || 4000;
