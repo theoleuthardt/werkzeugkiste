@@ -29,7 +29,6 @@ export default function WordCounter() {
         return new Error(`Error: ${response.statusText}`);
       }
       const output: string = await response.text();
-      console.log(output);
       setOutput(output);
     } catch (error) {
       console.error("Error while converting:", error);
