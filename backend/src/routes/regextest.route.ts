@@ -37,9 +37,9 @@ export async function regexTest(app: FastifyInstance) {
 
         let output = "";
         if (result) {
-          output = "the input matches the regular expression!";
+          output = "The input matches the regular expression!";
         } else {
-          output = "the input does not match the regular expression.";
+          output = "The input does not match the regular expression.";
         }
 
         reply.header("Content-Type", "text/plain").status(200).send(output);
