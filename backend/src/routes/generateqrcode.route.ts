@@ -26,7 +26,6 @@ export async function generateQRCode(app: FastifyInstance) {
 
       try {
         const qrCodeUrl = await QRCode.toDataURL(data.qrcodeContent);
-        console.log("QR Code generated:", qrCodeUrl);
         return reply
           .header("Content-Type", "application/json")
           .status(200)
