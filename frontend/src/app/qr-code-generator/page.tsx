@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function QrCodeGenerator() {
   const [loading, setLoading] = useState(false);
-  const [qrcode, setQRCode] = useState<string | null>(null);
+  const [QRCodeURL, setQRCodeURL] = useState<string | null>(null);
 
   const downloadImage = (dataUrl: string) => {
     const link = document.createElement("a");
@@ -33,7 +33,7 @@ export default function QrCodeGenerator() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            data: textInput,
+            qrcodeContent: textInput,
           }),
         },
       );
@@ -43,9 +43,8 @@ export default function QrCodeGenerator() {
       }
 
       const data = await response.json();
-      console.log("Data:", data);
       if (data.qrCode) {
-        setQRCode(data.qrCode);
+        setQRCodeURL(data.qrCode);
         downloadImage(data.qrCode);
       }
     } catch (error) {
@@ -55,6 +54,12 @@ export default function QrCodeGenerator() {
       setLoading(false);
     }
   };
+
+  function clearInputAndQRCode() {
+    setQRCodeURL("");
+    const data = document.getElementById("data") as HTMLInputElement;
+    data.value = "";
+  }
 
   return (
     <div className="w-screen h-auto min-h-screen bg-black text-white font-noto flex flex-col items-center">
@@ -82,14 +87,16 @@ export default function QrCodeGenerator() {
             }
             onClick={generateQRCode}
           />
+          <Button content="clear" onClick={clearInputAndQRCode} />
         </div>
         <div className="p-3 rounded-xl text-center">
-          {qrcode && (
+          {QRCodeURL && (
             <Image
               id="output"
-              src={qrcode}
+              src={QRCodeURL}
               alt="QR Code"
-              className="text-blue-400 text-3xl"
+              width={128}
+              height={128}
             />
           )}
         </div>
