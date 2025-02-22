@@ -1,4 +1,4 @@
-name: Build, Push and Deploy
+name: Deploy Werkzeugkiste!
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ on:
           - 'FR FR'
 
 jobs:
-  build-push-deploy:
+  docker-build-push:
     runs-on: ubuntu-latest
 
     steps:
