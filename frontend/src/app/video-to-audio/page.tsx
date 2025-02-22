@@ -5,12 +5,7 @@ import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Dropdown from "@/components/Dropdown";
-import {
-  FileFormatsTable,
-  outputFileFormats,
-  videoAudioFormats,
-  videoAudioFormatsTable,
-} from "@/constants";
+import { videoAudioFormats, videoAudioFormatsTable } from "@/constants";
 
 export default function DocConverter() {
   const [file, setFile] = useState<File | null>(null);
