@@ -2,7 +2,7 @@
 FROM node:18-alpine AS base
 
 # Install system dependencies
-RUN apk add --no-cache libc6-compat libreoffice ttf-liberation
+RUN apk add --no-cache libc6-compat libreoffice ttf-liberation ffmpeg
 
 WORKDIR /app
 
