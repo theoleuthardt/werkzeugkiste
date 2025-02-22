@@ -48,15 +48,28 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/werkzeugkiste-backend:latest
 
   deploy-on-server:
+    needs: docker-build-push
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install OpenVPN
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openvpn
+
+      - name: Connect to VPN
+        run: |
+          echo "${{ secrets.VPN_CONFIG }}" > config.ovpn
+          sudo openvpn --config config.ovpn --daemon
+          sleep 10
+
       - name: Deploy on Server
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v1.2.1
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.PORT }}
           script: |
-            cd /home/theo/docker/werkzeugkiste
+            cd "${{ secrets.HOMELAB_PATH }}"
             docker compose up -d --pull always
