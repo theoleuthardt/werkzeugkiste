@@ -8,6 +8,7 @@ import { regexTest } from "./src/routes/regextest.route";
 import { tmzConvert } from "./src/routes/tmzconvert.route";
 import { generateQRCode } from "./src/routes/generateqrcode.route";
 import { wordCounter } from "./src/routes/wordcounter.route";
+import { removeBG } from "./src/routes/removebg.route";
 
 const app = Fastify({ logger: true });
 
@@ -25,6 +26,7 @@ app.register(regexTest);
 app.register(tmzConvert);
 app.register(generateQRCode);
 app.register(wordCounter);
+app.register(removeBG);
 
 const PORT = process.env.PORT || 4000;
 app.listen({ port: Number(PORT), host: "0.0.0.0" }, () => {
