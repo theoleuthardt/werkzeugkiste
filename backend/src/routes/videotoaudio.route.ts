@@ -11,8 +11,13 @@ interface ConversionOptions {
   channels?: number;
   sampleRate?: number;
 }
-
 let options: ConversionOptions;
+
+const ffmpegEncoder: { [key: string]: string } = {
+  ".mp3": "libmp3lame",
+  ".wav": "pcm_s16le",
+  ".aac": "aac",
+};
 
 export async function videoToAudio(app: FastifyInstance) {
   app.post(
@@ -30,7 +35,7 @@ export async function videoToAudio(app: FastifyInstance) {
 
         let fileBuffer: Buffer | null = null;
         options = {
-          format: "mp3",
+          format: "",
           bitrate: "192k",
           channels: 2,
           sampleRate: 44100,
@@ -42,7 +47,7 @@ export async function videoToAudio(app: FastifyInstance) {
           } else if (part.type === "field") {
             const field = part as MultipartValue<string>;
             switch (field.fieldname) {
-              case "format":
+              case "outputFormat":
                 const format = field.value.toLowerCase();
                 options.format = format;
                 break;
@@ -63,6 +68,8 @@ export async function videoToAudio(app: FastifyInstance) {
           return reply.status(400).send({ error: "No file uploaded!" });
         }
 
+        console.log("options", options);
+
         await fs.writeFile(inputPath, fileBuffer);
 
         await new Promise<void>((resolve, reject) => {
@@ -71,7 +78,7 @@ export async function videoToAudio(app: FastifyInstance) {
             inputPath,
             "-vn",
             "-acodec",
-            options.format === "mp3" ? "libmp3lame" : options.format,
+            ffmpegEncoder[options.format],
             "-ab",
             options.bitrate || "192k",
             "-ac",
@@ -83,8 +90,12 @@ export async function videoToAudio(app: FastifyInstance) {
 
           const ffmpeg = spawn("ffmpeg", args);
 
+          ffmpeg.stdout.on("data", (data) => {
+            console.log(`ffmpeg stdout: ${data}`);
+          });
+
           ffmpeg.stderr.on("data", (data) => {
-            console.log(`ffmpeg stderr: ${data}`);
+            console.error(`ffmpeg stderr: ${data}`);
           });
 
           ffmpeg.on("close", (code) => {

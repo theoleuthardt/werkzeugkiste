@@ -114,7 +114,6 @@ export default function DocConverter() {
               const selectedFormat =
                 event.currentTarget.textContent?.trim() || "";
               setSelectedOutputFormat(selectedFormat);
-              console.log(selectedOutputFormat);
             }}
           />
         </div>
