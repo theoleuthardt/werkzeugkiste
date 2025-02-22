@@ -172,15 +172,15 @@ export const videoAudioFormats = [
 
 export const videoAudioFormatsTable = [
   {
-    input: ".mp4",
+    input: ".mp4 (MPEG-4)",
     output: [".mp3", ".wav", ".aac"],
   },
   {
-    input: ".avi",
+    input: ".avi (Audio Video Interleave)",
     output: [".mp3", ".wav", ".aac"],
   },
   {
-    input: ".mov",
+    input: ".mov (Apple QuickTime Movie)",
     output: [".mp3", ".wav", ".aac"],
   },
 ];

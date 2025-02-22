@@ -4,7 +4,7 @@ import { toolLinks } from "@/constants";
 
 export const metadata: Metadata = {
   title: toolLinks[8].title,
-  description: "MP4 to MP3 converter!",
+  description: "Video to audio converter!",
 };
 
 export default function RootLayout({

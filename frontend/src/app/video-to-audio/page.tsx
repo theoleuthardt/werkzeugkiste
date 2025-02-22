@@ -43,7 +43,7 @@ export default function DocConverter() {
     }
   };
 
-  const convertDoc = async () => {
+  const convertVideo = async () => {
     if (!file) {
       alert("No file selected");
       return;
@@ -57,7 +57,7 @@ export default function DocConverter() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/video-convert",
+        process.env.backend_url + "/api/video-to-audio",
         {
           method: "POST",
           body: formData,
@@ -66,6 +66,7 @@ export default function DocConverter() {
 
       if (!response.ok) {
         console.error(`Error: ${response.statusText}`);
+        return;
       }
 
       const blob = await response.blob();
@@ -94,7 +95,7 @@ export default function DocConverter() {
     <div className="w-screen h-auto min-h-screen bg-black text-white font-noto flex flex-col items-center">
       <Navbar renderHomeLink={true} />
       <div className="w-screen h-auto min-h-[calc(100vh-80px-60px)] flex flex-1 flex-col items-center justify-center">
-        <h2 className="text-5xl font-bold text-white mb-16">doc-converter</h2>
+        <h2 className="text-5xl font-bold text-white mb-16">video-to-audio</h2>
         <div className="h-36 flex flex-row items-center justify-center gap-4">
           <input
             type="file"
@@ -113,6 +114,7 @@ export default function DocConverter() {
               const selectedFormat =
                 event.currentTarget.textContent?.trim() || "";
               setSelectedOutputFormat(selectedFormat);
+              console.log(selectedOutputFormat);
             }}
           />
         </div>
@@ -125,7 +127,7 @@ export default function DocConverter() {
                 "convert"
               )
             }
-            onClick={convertDoc}
+            onClick={convertVideo}
           />
         </div>
         <div className="overflow-hidden text-xl rounded-lg border border-white mb-16 transition-all duration-300 ease-in-out hover:border-blue-400">
@@ -162,12 +164,8 @@ export default function DocConverter() {
               <tbody>
                 {videoAudioFormatsTable.map((format) => (
                   <tr key={format.input} className="border-b">
-                    <td className="min-w-96 px-6 py-4 border-r">
-                      {format.input}
-                    </td>
-                    <td className="min-w-96 px-6 py-4">
-                      {format.output.join(", ")}
-                    </td>
+                    <td className="w-96 px-6 py-4 border-r">{format.input}</td>
+                    <td className="px-6 py-4">{format.output.join(", ")}</td>
                   </tr>
                 ))}
               </tbody>
