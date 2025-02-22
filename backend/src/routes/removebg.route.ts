@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { Config, removeBackground } from "@imgly/background-removal-node";
+import { removeBackground } from "@imgly/background-removal-node";
 import sharp from "sharp";
 
 export async function removeBG(app: FastifyInstance) {
