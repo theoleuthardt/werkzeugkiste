@@ -46,3 +46,17 @@ jobs:
           context: ./backend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/werkzeugkiste-backend:latest
+
+  deploy-on-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy on Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/theo/docker/werkzeugkiste
+            docker compose up -d --pull always
