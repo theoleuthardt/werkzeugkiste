@@ -52,16 +52,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install OpenVPN
+      - name: Install Wireguard
         run: |
           sudo apt-get update
-          sudo apt-get install -y openvpn
+          sudo apt-get install -y wireguard-tools
 
-      - name: Connect to VPN
+      - name: Setup Wireguard Configuration
         run: |
-          echo "${{ secrets.VPN_CONFIG }}" > config.ovpn
-          sudo openvpn --config config.ovpn --daemon
+          sudo mkdir -p /etc/wireguard
+          echo "${{ secrets.VPN_CONFIG }}" | sudo tee /etc/wireguard/wg0.conf > /dev/null
+          sudo chmod 600 /etc/wireguard/wg0.conf
+
+      - name: Connect to Wireguard
+        run: |
+          sudo wg-quick up wg0
           sleep 10
+          sudo wg show
+      
 
       - name: Deploy on Server
         uses: appleboy/ssh-action@v1.2.1
