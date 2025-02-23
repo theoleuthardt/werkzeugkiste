@@ -3,6 +3,10 @@ FROM node:18-alpine AS base
 
 # Install system dependencies
 RUN apk add --no-cache libc6-compat libreoffice ttf-liberation ffmpeg
+RUN apk add --update --no-cache python3 py3-pip \
+    && ln -sf python3 /usr/bin/python \
+    && pip3 install --no-cache --upgrade pip setuptools \
+RUN pip3 install --no-cache watchdog gradio rembg
 
 WORKDIR /app
 
