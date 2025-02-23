@@ -1,4 +1,4 @@
-name: Build, Push and Deploy
+name: Deploy Werkzeugkiste!
 
 on:
   pull_request:
@@ -17,8 +17,7 @@ on:
           - 'FR FR'
 
 jobs:
-  build-push-deploy:
-    if: github.event.pull_request.merged == true
+  docker-build-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -47,3 +46,38 @@ jobs:
           context: ./backend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/werkzeugkiste-backend:latest
+
+  deploy-on-server:
+    needs: docker-build-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Wireguard
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wireguard-tools
+
+      - name: Setup Wireguard Configuration
+        run: |
+          sudo mkdir -p /etc/wireguard
+          echo "${{ secrets.VPN_CONFIG }}" | sudo tee /etc/wireguard/wg0.conf > /dev/null
+          sudo chmod 600 /etc/wireguard/wg0.conf
+
+      - name: Connect to Wireguard
+        run: |
+          sudo wg-quick up wg0
+          sleep 10
+          sudo wg show
+      
+
+      - name: Deploy on Server
+        uses: appleboy/ssh-action@v1.2.1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd "${{ secrets.HOMELAB_PATH }}"
+            sudo docker compose up -d --pull always
