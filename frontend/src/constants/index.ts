@@ -154,3 +154,33 @@ export const FileFormatsTable = [
     output: [".pdf", ".ppt", ".pptx"],
   },
 ];
+
+export const videoAudioFormats = [
+  {
+    input: ".mp4",
+    output: [".mp3", ".wav", ".aac"],
+  },
+  {
+    input: ".avi",
+    output: [".mp3", ".wav", ".aac"],
+  },
+  {
+    input: ".mov",
+    output: [".mp3", ".wav", ".aac"],
+  },
+];
+
+export const videoAudioFormatsTable = [
+  {
+    input: ".mp4 (MPEG-4)",
+    output: [".mp3", ".wav", ".aac"],
+  },
+  {
+    input: ".avi (Audio Video Interleave)",
+    output: [".mp3", ".wav", ".aac"],
+  },
+  {
+    input: ".mov (Apple QuickTime Movie)",
+    output: [".mp3", ".wav", ".aac"],
+  },
+];
