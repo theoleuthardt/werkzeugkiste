@@ -1,12 +1,28 @@
-# Basis-Image
+FROM python:3.9-slim AS python-deps
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN pip3 install --no-cache-dir watchdog gradio rembg
+
 FROM node:18-alpine AS base
 
-# Install system dependencies
-RUN apk add --no-cache libc6-compat libreoffice ttf-liberation
+RUN apk add --no-cache \
+    python3 \
+    ffmpeg \
+    libreoffice \
+    ttf-liberation \
+    libc6-compat
+
+COPY --from=python-deps /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /app
 
-# Dependencies installieren
 FROM base AS deps
 COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
 
@@ -17,7 +33,6 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Build stage
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -30,7 +45,6 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Production image
 FROM base AS runner
 WORKDIR /app
 
@@ -39,7 +53,6 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 fastify
 
-# Copy built application
 COPY --from=builder --chown=fastify:nodejs /app/dist ./dist
 COPY --from=deps --chown=fastify:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=fastify:nodejs /app/package.json ./package.json
