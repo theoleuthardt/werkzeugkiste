@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "rootDir": ".",
     "strict": true,
-    "allowSyntheticDefaultImports": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
   }
 }
