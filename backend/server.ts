@@ -14,7 +14,7 @@ import { removeBG } from "./src/routes/removebg.route";
 const app = Fastify({ logger: true });
 
 app.register(cors, {
-  origin: "*",
+  origin: process.env.CORS_ALLOWED_ORIGIN || "*",
   exposedHeaders: "Content-Disposition",
   methods: "POST",
   allowedHeaders: "Content-Type",
