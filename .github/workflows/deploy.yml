@@ -79,4 +79,4 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd "${{ secrets.HOMELAB_PATH }}"
-            sudo docker compose up -d --pull always
+            docker compose up -d --pull always
