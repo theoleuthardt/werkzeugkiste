@@ -4,13 +4,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: werkzeugkiste-frontend
+    env_file: .env
     environment:
-      - NODE_ENV=production
-      - HOSTNAME=0.0.0.0
-      - PORT=3000
-      - backend_url=http://backend:4000
+      - NODE_ENV=${NODE_ENV}
+      - HOSTNAME=${HOSTNAME}
+      - PORT=${FRONTEND_PORT}
+      - BACKEND_URL=${BACKEND}
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT}:3000"
     restart: unless-stopped
 
   backend:
@@ -18,13 +19,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: werkzeugkiste-backend
+    env_file: .env
     environment:
-      - NODE_ENV=production
-      - HOSTNAME=0.0.0.0
-      - PORT=4000
-      - CORS_ORIGIN=http://frontend:3000
+      - NODE_ENV=${NODE_ENV}
+      - HOSTNAME=${HOSTNAME}
+      - PORT=${BACKEND_PORT}
+      - CORS_ALLOWED_ORIGIN=${CORS_ALLOWED_ORIGIN}
     ports:
-      - "4000:4000"
+      - "${BACKEND_PORT}:4000"
     restart: unless-stopped
 
 networks:
