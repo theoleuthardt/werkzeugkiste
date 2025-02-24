@@ -18,7 +18,7 @@ export default function RgbToHex() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/color-convert",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/color-convert",
         {
           method: "POST",
           headers: {

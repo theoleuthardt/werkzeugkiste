@@ -57,7 +57,7 @@ export default function DocConverter() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/video-to-audio",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/video-to-audio",
         {
           method: "POST",
           body: formData,

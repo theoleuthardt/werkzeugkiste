@@ -32,10 +32,13 @@ export default function BGRemover() {
     setLoading(true);
 
     try {
-      const response = await fetch(process.env.backend_url + "/api/remove-bg", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/remove-bg",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
 
       if (!response.ok) {
         console.error(`Error: ${response.statusText}`);

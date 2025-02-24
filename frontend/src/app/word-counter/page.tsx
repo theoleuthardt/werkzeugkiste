@@ -16,7 +16,7 @@ export default function WordCounter() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/word-counter",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/word-counter",
         {
           method: "POST",
           headers: {

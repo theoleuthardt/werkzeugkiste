@@ -24,7 +24,7 @@ export default function PasswordGenerator() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/password-generate",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/password-generate",
         {
           method: "POST",
           headers: {

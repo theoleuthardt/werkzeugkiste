@@ -19,7 +19,7 @@ export default function TMZConverter() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/tmz-convert",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/tmz-convert",
         {
           method: "POST",
           headers: {
