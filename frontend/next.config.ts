@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
+import dotenv from "dotenv";
+
+dotenv.config({ path: "../.env" });
 
 const nextConfig: NextConfig = {
   output: "standalone",
   env: {
-    backend_url: process.env.BACKEND_URL || "http://localhost:4000",
+    backend_url: process.env.NEXT_PUBLIC_BACKEND_URL,
   },
 };
 
