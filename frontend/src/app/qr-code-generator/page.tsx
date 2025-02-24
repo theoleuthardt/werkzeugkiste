@@ -26,7 +26,7 @@ export default function QrCodeGenerator() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/generate-qrcode",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/generate-qrcode",
         {
           method: "POST",
           headers: {

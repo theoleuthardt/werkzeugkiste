@@ -17,7 +17,7 @@ export default function RegexTester() {
 
     try {
       const response = await fetch(
-        process.env.backend_url + "/api/regex-test",
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/regex-test",
         {
           method: "POST",
           headers: {

@@ -6,7 +6,7 @@ dotenv.config({ path: "../.env" });
 const nextConfig: NextConfig = {
   output: "standalone",
   env: {
-    backend_url: process.env.NEXT_PUBLIC_BACKEND_URL,
+    NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
   },
 };
 
