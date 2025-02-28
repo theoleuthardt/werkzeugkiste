@@ -49,7 +49,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/werkzeugkiste-backend:latest
           build-args: |
-              CORS_ALLOWED_ORIGIN=${{ secrets.CORS_ALLOWED_ORIGIN }}
+            CORS_ALLOWED_ORIGIN=${{ secrets.CORS_ALLOWED_ORIGIN }}
 
   deploy-on-server:
     needs: docker-build-push
