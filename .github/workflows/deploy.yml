@@ -41,6 +41,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/werkzeugkiste-frontend:latest
           build-args: |
             NEXT_PUBLIC_BACKEND_URL=${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+            NODE_ENV=${{ secrets.NODE_ENV }}
 
       - name: Build and Push Backend
         uses: docker/build-push-action@v6
@@ -50,6 +51,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/werkzeugkiste-backend:latest
           build-args: |
             CORS_ALLOWED_ORIGIN=${{ secrets.CORS_ALLOWED_ORIGIN }}
+            NODE_ENV=${{ secrets.NODE_ENV }}
 
   deploy-on-server:
     needs: docker-build-push

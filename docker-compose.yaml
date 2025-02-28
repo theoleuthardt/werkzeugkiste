@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
+        NODE_ENV: ${NODE_ENV}
     container_name: werkzeugkiste-frontend
     environment:
       - NODE_ENV=${NODE_ENV}
@@ -22,6 +23,7 @@ services:
       dockerfile: Dockerfile
       args:
         CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN}
+        NODE_ENV: ${NODE_ENV}
     container_name: werkzeugkiste-backend
     environment:
       - NODE_ENV=${NODE_ENV}
