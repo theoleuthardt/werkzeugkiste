@@ -34,4 +34,5 @@ console.log("Starting Fastify server...");
 const PORT = process.env.BACKEND_PORT;
 app.listen({ port: Number(PORT), host: "0.0.0.0" }, () => {
   console.log(`🚀Fastify is live on http://localhost:${PORT}`);
+  console.log(`Allowed origin: ${process.env.CORS_ALLOWED_ORIGIN}`);
 });
