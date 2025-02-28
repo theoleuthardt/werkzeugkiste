@@ -10,10 +10,6 @@ import { generateQRCode } from "./src/routes/generateqrcode.route";
 import { wordCounter } from "./src/routes/wordcounter.route";
 import { videoToAudio } from "./src/routes/videotoaudio.route";
 import { removeBG } from "./src/routes/removebg.route";
-import dotenv from "dotenv";
-import path from "node:path";
-
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = Fastify({ logger: true });
 
@@ -38,4 +34,5 @@ console.log("Starting Fastify server...");
 const PORT = process.env.BACKEND_PORT;
 app.listen({ port: Number(PORT), host: "0.0.0.0" }, () => {
   console.log(`🚀Fastify is live on http://localhost:${PORT}`);
+  console.log(`Allowed origin: ${process.env.CORS_ALLOWED_ORIGIN}`);
 });
