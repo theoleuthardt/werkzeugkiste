@@ -10,6 +10,10 @@ import { generateQRCode } from "./src/routes/generateqrcode.route";
 import { wordCounter } from "./src/routes/wordcounter.route";
 import { videoToAudio } from "./src/routes/videotoaudio.route";
 import { removeBG } from "./src/routes/removebg.route";
+import dotenv from "dotenv";
+import path from "node:path";
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = Fastify({ logger: true });
 

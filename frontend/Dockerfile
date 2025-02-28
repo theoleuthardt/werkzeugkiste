@@ -24,6 +24,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ENV NODE_ENV=production
 ARG NEXT_PUBLIC_BACKEND_URL
 ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
 
@@ -62,4 +63,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD echo "NEXT_PUBLIC_BACKEND_URL = $NEXT_PUBLIC_BACKEND_URL" && node server.js
+CMD node server.js
