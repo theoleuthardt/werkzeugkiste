@@ -8,14 +8,19 @@ export async function removeBG(app: FastifyInstance) {
   app.post(
     "/api/remove-bg",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const tmpDir = path.join(process.cwd(), "tmp");
+      const tmpDir =
+        process.env.NODE_ENV === "production"
+          ? "/app/tmp"
+          : path.join(process.cwd(), "tmp");
       const sessionId = randomUUID();
       const inputPath = path.join(tmpDir, `input-${sessionId}.png`);
       const outputPath = path.join(tmpDir, `output-${sessionId}.png`);
 
       try {
         const parts = request.parts();
-        await fs.mkdir(tmpDir, { recursive: true });
+        if (process.env.NODE_ENV === "development") {
+          await fs.mkdir(tmpDir, { recursive: true });
+        }
 
         let fileBuffer: Buffer | null = null;
 
@@ -53,7 +58,10 @@ export async function removeBG(app: FastifyInstance) {
         });
 
         const outputImageBuffer = await fs.readFile(outputPath);
-        await Promise.all([fs.unlink(inputPath), fs.unlink(outputPath)]);
+        await Promise.all([
+          fs.unlink(inputPath).catch(() => {}),
+          fs.unlink(outputPath).catch(() => {}),
+        ]);
 
         reply
           .header("Content-Type", "image/png")
