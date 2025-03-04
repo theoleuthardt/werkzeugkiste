@@ -82,7 +82,7 @@ export default function QrCodeGenerator() {
               loading ? (
                 <div className="h-10 w-10 border-8 border-blue-100 border-t-blue-500 rounded-full animate-spin" />
               ) : (
-                "convert"
+                "generate"
               )
             }
             onClick={generateQRCode}
