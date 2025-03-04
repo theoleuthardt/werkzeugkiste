@@ -59,10 +59,7 @@ COPY --from=deps --chown=fastify:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=fastify:nodejs /app/package.json ./package.json
 
 USER root
-RUN mkdir -p /app/tmp && chown -R fastify:fastify /app/tmp
-
-USER fastify
-
+RUN mkdir -p /app/tmp
 EXPOSE 4000
 
 ARG CORS_ALLOWED_ORIGIN
