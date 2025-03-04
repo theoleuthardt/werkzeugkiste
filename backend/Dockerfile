@@ -58,9 +58,10 @@ COPY --from=builder --chown=fastify:nodejs /app/dist ./dist
 COPY --from=deps --chown=fastify:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=fastify:nodejs /app/package.json ./package.json
 
-USER fastify
-
+USER root
 RUN mkdir -p /app/tmp && chown -R fastify:fastify /app/tmp
+
+USER fastify
 
 EXPOSE 4000
 
